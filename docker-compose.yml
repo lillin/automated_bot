@@ -1,0 +1,17 @@
+version: "3.4"
+
+x-max: &max-users-posts-likes
+  max_users: 10
+  max_posts_per_user: 10
+  max_like_per_user: 10
+
+
+services:
+  bot:
+    build: .
+    container_name: bot
+    command: python run.py
+    environment:
+      <<: *max-users-posts-likes
+    ports:
+    - "5000:5000"
