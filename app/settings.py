@@ -1,8 +1,16 @@
+import socket
 import os
 
 
-# TODO: get public ipv4 through service api + investigate issue with localhost
-BASE_URL = f'http://192.168.98.161:8000/api'
+def get_ip():
+    # TODO: get IPv4 for WiFi adapter
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('10.255.255.255', 1))
+    return '192.168.0.175' + ':8000'
+
+
+HOST = os.environ.get('host', get_ip())
+BASE_URL = f'http://{HOST}/api'
 
 MAX_USERS = int(os.environ.get('max_users'))
 MAX_POSTS_PER_USER = int(os.environ.get('max_posts_per_user'))
