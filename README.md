@@ -10,5 +10,5 @@ Based on these properties, random amount will be caclulated on script execution.
 You can run `ipconfig` on Windows or `hostname -I` on Linux to get IPv4 address.
 - Run `pip install -r requirements.txt` from root project directory. 
 Please note, that on Windows you might run `python -m pip install -r requirements.txt` in PowerShell as administrator.
-- Run social_network application (see social_network/README.md for more details)
+- Run social_network application (see [social_network/README.md](https://github.com/lillin/social_network#installation) for more details)
 - Finally, run `python run.py` to generate data through social_network's API.
