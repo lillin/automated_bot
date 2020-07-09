@@ -1,20 +1,25 @@
-import socket
 import os
+
+import netifaces as ni
+from dotenv import load_dotenv, find_dotenv
+
+
+env = load_dotenv(find_dotenv())
 
 
 def get_ip():
-    # TODO: get IPv4 for WiFi adapter
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(('10.255.255.255', 1))
-    return '192.168.0.175' + ':8000'
+    """
+    Get IPv4 address of ethernet interface of machine.
+    """
+    return ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
 
 
-HOST = os.environ.get('host', get_ip())
+HOST = os.getenv('HOST', get_ip()) + ':8000'
 BASE_URL = f'http://{HOST}/api'
 
-MAX_USERS = int(os.environ.get('max_users'))
-MAX_POSTS_PER_USER = int(os.environ.get('max_posts_per_user'))
-MAX_LIKES_PER_USER = int(os.environ.get('max_like_per_user'))
+MAX_USERS = int(os.getenv('MAX_USERS', 10))
+MAX_POSTS_PER_USER = int(os.getenv('MAX_POSTS_PER_USER', 10))
+MAX_LIKES_PER_USER = int(os.getenv('MAX_LIKES_PER_USER', 10))
 
 SIGN_UP_URL = BASE_URL + '/sign_up/'
 GET_TOKEN_URL = BASE_URL + '/token/'
