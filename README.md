@@ -5,7 +5,7 @@ Based on these properties, random amount will be caclulated on script execution.
 
 ## Installation
 - First of all install **Python3.6**
-- Create `.env` file and set desirable values to variables (see example.env for details)
+- Create `.env` file and set desirable values to variables (see `example.env` for details)
 - Also you can add HOST variable into `.env` to set IPv4 from your local host manually, i.e. `HOST=172.80.0.0`. 
 You can run `ipconfig` on Windows or `hostname -I` on Linux to get IPv4 address.
 - Run `pip install -r requirements.txt` from root project directory. 
