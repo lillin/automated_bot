@@ -1,3 +1,4 @@
+import logging
 import random
 import requests
 
@@ -26,6 +27,8 @@ class Bot:
 
     def sign_up_users(self):
         # sign up every user
+
+        logging.info('Sign up users...')
         for payload in self.users_payload:
             requests.post(
                 settings.SIGN_UP_URL, json=payload, headers=settings.BASE_HEADER
@@ -33,6 +36,8 @@ class Bot:
 
     def obtain_tokens(self):
         # exchange credentials to tokens
+
+        logging.info('Obtaining users\' tokens...')
         for payload in self.users_payload:
             credentials = dict((k, v) for k, v in payload.items() if k in ['username', 'password'])
 
@@ -54,6 +59,7 @@ class Bot:
             ).json()['id'] for _ in posts_amount
         ]
 
+        logging.info(f'User adding posts {posts_ids}')
         self.posts_ids += posts_ids
 
     def like_post(self, header):
@@ -71,4 +77,5 @@ class Bot:
         urls_to_posts = [settings.LIKE_URL.format(post_id=i) for i in posts_choices]
 
         for url in urls_to_posts:
+            logging.info(f'Like post on {url}')
             requests.post(url, headers=header)

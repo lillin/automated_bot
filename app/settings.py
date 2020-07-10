@@ -1,20 +1,11 @@
 import os
 
-import netifaces as ni
 from dotenv import load_dotenv, find_dotenv
 
 
 env = load_dotenv(find_dotenv())
 
-
-def get_ip():
-    """
-    Get IPv4 address of ethernet interface of machine.
-    """
-    return ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-
-
-HOST = os.getenv('HOST', get_ip()) + ':8000'
+HOST = os.getenv('HOST', '127.0.0.1') + ':8000'
 BASE_URL = f'http://{HOST}/api'
 
 MAX_USERS = int(os.getenv('MAX_USERS', 10))
